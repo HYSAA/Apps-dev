@@ -21,8 +21,9 @@ const add= () =>{
 const del= () =>{
 
     result.textContent="";
-}
+}  
 
+  
 addButton.addEventListener("click", function () {
 
 add();
