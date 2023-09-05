@@ -1,22 +1,23 @@
 let submit = document.getElementById("submit");
 
 const loan = () => {
-  let lamount = parseFloat(document.getElementById("loanAmount").value);
-  let months = parseFloat(document.getElementById("month").value);
-  let computeAmount=document.getElementById("computeAmount")
+  let lamount = new Number(document.getElementById("loanAmount").value);
+  let months = new Number(document.getElementById("month").value);
+  let computeAmount= new Number(document.getElementById("computeAmount"))
   let amonths = new Number(document.getElementById("amountmonth"));
 
   if (lamount >= 10000) {
-    lamount = lamount + lamount * 0.035;
+    lamount = lamount + (lamount * 0.035);
 //   } else if (lamount < 10000) {
    
 //     return lamount;
 //   }
   }
   if (months >= 18) {
-    lamount = lamount + lamount * 0.03;
-  } else if (months >= 12 || months <18) {
-    lamount = lamount + lamount * 0.02;
+    lamount = lamount + (lamount * 0.03);
+
+  }else if (months >= 12 && months <18) {
+    lamount = lamount + (lamount * 0.02);
   }
 
   console.log(lamount);
@@ -25,7 +26,7 @@ const loan = () => {
   console.log(lamount.toLocaleString('en', { minimumFractionDigits: 2, maximumFractionDigits: 2 }));
   console.log(amonths.toLocaleString('en', { minimumFractionDigits: 2, maximumFractionDigits: 2 }));
   document.getElementById("computeAmount").value = lamount.toLocaleString('en', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
-  document.getElementById("amountMonth").value = amonths.toLocaleString('en', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
+  document.getElementById("amountmonth").value = amonths.toLocaleString('en', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
 };
 
 submit.addEventListener('click', function () {
