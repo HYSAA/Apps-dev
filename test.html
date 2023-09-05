@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    
+    <div>
+        
+    <table>
+        <th colspan="2" style="text-align: center;">Loan Computation</th>
+
+        <tr>
+            <td>Enter Loan Amount: 
+            <td><input type="text" id="lamount"></td>
+        </td>
+        
+        <tr>
+            <td>Terms of Payment(Months):</td>
+            <td><input type="text" id="months"></td>
+        </tr>
+        <th colspan="2" style="text-align: center;"><button id="submit">Compute Loan</button></th>
+
+        <tr>
+            <td>Computed Loan Amount</td>
+            <td><input type="text"  id="clamount"></td>
+        </tr>
+        <tr>
+            <td>Amount To Pay Per Month</td>
+            <td><input type="text"  id="amonths"></td>
+        </tr>
+    </table>
+</div>
+
+
+</body>
+
+<script>
+    let submit = document.getElementById("submit");
+
+    submit.addEventListener("click",()=>{
+
+        let lamount = new Number(document.getElementById("lamount").value);
+        let months = new Number(document.getElementById("months").value);
+        let clamount = new Number(document.getElementById("clamount"));
+        let amonths = new Number(document.getElementById("amonths"));
+
+        if(lamount >= 10000)
+        {
+            lamount = lamount + (lamount * 0.035)
+        }
+
+        if(months >= 12 && months < 18)
+        {
+            lamount = lamount + (lamount * 0.02);
+        }
+        else if(months >= 18)
+        {
+            lamount = lamount + (lamount * 0.03);
+
+        }
+        console.log(lamount)
+
+        console.log(lamount.toLocaleString('en', { minimumFractionDigits: 2, maximumFractionDigits: 2 }));
+        amonths = lamount / months;
+        console.log(amonths.toLocaleString('en', { minimumFractionDigits: 2, maximumFractionDigits: 2 }));
+
+        document.getElementById("clamount").value = lamount.toLocaleString('en', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
+        document.getElementById("amonths").value = amonths.toLocaleString('en', { minimumFractionDigits: 2, maximumFractionDigits: 2 });;
+
+
+
+    });
+</script>
+</html>
