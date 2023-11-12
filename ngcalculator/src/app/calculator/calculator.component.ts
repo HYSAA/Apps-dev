@@ -1,64 +1,57 @@
 import { Component, OnInit, HostListener } from '@angular/core';
 
-
 @Component({
   selector: 'app-calculator',
   templateUrl: './calculator.component.html',
   styleUrls: ['./calculator.component.css']
 })
 export class CalculatorComponent implements OnInit {
-  constructor() { }
-  ngOnInit() {
-  }
   currentNumber = '0';
-  firstOperand = null;
-  operator = null;
+  firstOperand: number | null = null;
+  operator: string | null = null;
   waitForSecondNumber = false;
 
+  ngOnInit() {}
 
-
-
-  public getNumber(v: string) {
-    console.log(v);
+  getNumber(value: string): void {
+    console.log(value);
     if (this.waitForSecondNumber) {
-      this.currentNumber = v;
+      this.currentNumber = value;
       this.waitForSecondNumber = false;
     } else {
-      this.currentNumber === '0' ? this.currentNumber = v : this.currentNumber += v;
+      this.currentNumber === '0' ? this.currentNumber = value : this.currentNumber += value;
     }
   }
 
-
-
-  getDecimal() {
+  getDecimal(): void {
     if (!this.currentNumber.includes('.')) {
       this.currentNumber += '.';
     }
   }
 
-
-  private doCalculation(op, secondOp) {
+  private doCalculation(op: string, secondOp: number): number {
     switch (op) {
       case '+':
-        return this.firstOperand += secondOp;
+        return this.firstOperand! += secondOp;
       case '-':
-        return this.firstOperand -= secondOp;
+        return this.firstOperand! -= secondOp;
       case '*':
-        return this.firstOperand *= secondOp;
+        return this.firstOperand! *= secondOp;
       case '/':
-        return this.firstOperand /= secondOp;
+        return this.firstOperand! /= secondOp;
       case '=':
         return secondOp;
+      default:
+        return 0;
     }
   }
 
-
-  public getOperation(op: string) {
+  getOperation(op: string): void {
     console.log(op);
     if (this.firstOperand === null) {
       this.firstOperand = Number(this.currentNumber);
     } else if (this.operator) {
-      const result = this.doCalculation(this.operator, Number(this.currentNumber))
+      const result = this.doCalculation(this.operator, Number(this.currentNumber));
       this.currentNumber = String(result);
       this.firstOperand = result;
     }
@@ -66,7 +59,8 @@ export class CalculatorComponent implements OnInit {
     this.waitForSecondNumber = true;
     console.log(this.firstOperand);
   }
-  public clear() {
+
+  clear(): void {
     this.currentNumber = '0';
     this.firstOperand = null;
     this.operator = null;
@@ -74,28 +68,24 @@ export class CalculatorComponent implements OnInit {
   }
 
   @HostListener('document:keydown', ['$event'])
-  onKeyPress(event: KeyboardEvent) {
+  onKeyPress(event: KeyboardEvent): void {
+    const key = event.key;
 
-    if (event.key === '0' ||event.key === '1' || event.key === '2' || event.key === '3' || event.key === '4' || event.key === '5' || event.key === '6' || event.key === '7' || event.key === '8' || event.key === '9') {
-      this.getNumber(event.key)
-
-    }
-    if (event.key === '+' || event.key === '-' || event.key === '/' || event.key === '*' || event.key === '=' || event.key === 'Enter') {
-
-      let newKey = event.key;
-
-      if (event.key === 'Enter') {
-        newKey = '=';
-      }
-      this.getOperation(newKey)
+    if ('0123456789'.includes(key)) {
+      this.getNumber(key);
     }
 
-    if (event.key === '.') {
-      this.getDecimal()
+    if ('+-/*=Enter'.includes(key)) {
+      const newKey = key === 'Enter' ? '=' : key;
+      this.getOperation(newKey);
     }
 
-    if (event.key === 'Delete') {
-      this.clear()
+    if (key === '.') {
+      this.getDecimal();
+    }
+
+    if (key === 'Delete') {
+      this.clear();
     }
   }
 }
