@@ -1,0 +1,10 @@
+<!-- src/app/student-display/student-display.component.html -->
+<div>
+    <h2>Student Information</h2>
+    <ul>
+      <li *ngFor="let student of students">
+        {{ student.firstName }} {{ student.lastName }} - Age: {{ student.age }} - Grade: {{ student.grade }}
+      </li>
+    </ul>
+  </div>
+  

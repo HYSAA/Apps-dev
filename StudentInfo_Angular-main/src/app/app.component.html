@@ -1,0 +1,84 @@
+<!--navbar-->
+<nav class="navbar navbar-light bg-dark">
+  <div class="container-fluid">
+    <h4 class="text-light">Student Management System</h4>
+
+    <div class="d-flex">
+    </div>
+  </div>
+</nav>
+<!--Form-->
+<div class="container-fluid mt-1">
+  <div class="row">
+    <div class="mx-auto col-10 col-md-8 col-lg-4 pt-3">
+      <!--ID-->
+      <div class="form-floating mb-3">
+        <input type="text" class="form-control" id="fSid" [(ngModel)]="sid" placeholder="Student ID">
+        <label for="floatingInput">Student ID</label>
+      </div>
+      <!--Name-->
+      <div class="form-floating mb-3">
+        <input type="text" class="form-control" id="fName" [(ngModel)]="name" placeholder="Name">
+        <label for="floatingInput">Name</label>
+      </div>
+      <!--Email-->
+      <div class="form-floating mb-3">
+        <input type="email" class="form-control" id="fEmail" [(ngModel)]="email" placeholder="Email">
+        <label for="floatingInput">Email address</label>
+      </div>
+      <!--Department-->
+      <div class="form-floating mb-3">
+        <select class="form-select" aria-label="Department" id="fdepartment" (change)="selectDept($event)">
+          <option selected> Choose a Department</option>
+          <option *ngFor="let dept of departmentList">{{dept}}</option>
+        </select>
+      </div>
+      <!--Semester-->
+      <div class="form-floating mb-3">
+        <select class="form-select" aria-label="Semester" id="fsemester" (change)="selectSem($event)">
+          <option selected> Choose a Semester</option>
+          <option *ngFor="let sem of semesterList">{{sem}}</option>
+        </select>
+      </div>
+      <!--CGPA-->
+      <div class="form-floating mb-3">
+        <input type="text" class="form-control" id="fCgpa" [(ngModel)]="cgpa" placeholder="CGPA">
+        <label for="floatingInput">CGPA</label>
+      </div>
+      <!--Add Std btn-->
+      <button class=" btn btn-success" type="button" (click)="submitInfo();">Add Student</button>
+    </div>
+  </div>
+</div>
+
+
+
+<!----table-->
+  <div class="container-fluid ">
+  <table class="table table-dark table-striped mt-4 text-light">
+    <thead>
+      <tr>
+        <th scope="col">Student ID</th>
+        <th scope="col">Name</th>
+        <th scope="col">Email</th>
+        <th scope="col">Department</th>
+        <th scope="col">Semester</th>
+        <th scope="col">CGPA</th>
+      </tr>  
+    </thead>
+    <tbody class="table-light table-striped">
+      <tr *ngFor="let studentInfo of studentInfo">
+        <td>{{studentInfo.sid}}</td>
+        <td>{{studentInfo.name}}</td>
+        <td>{{studentInfo.email}}</td>
+        <td>{{studentInfo.department}}</td>
+        <td>{{studentInfo.semester}}</td>
+        <td>{{studentInfo.cgpa}}</td>
+        <!--<td>
+          <button class="btn btn-primary">Edit</button>&nbsp;
+          <button class="btn btn-danger">Delete</button>
+        </td>-->
+      </tr>
+    </tbody>
+  </table>
+</div>
